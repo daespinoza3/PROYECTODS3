@@ -18,92 +18,52 @@ h2 { font-size: 3.5rem; color: var(--azul-oscuro); margin-bottom: 1.5rem; text-a
 h2::after { content: ''; display: block; width: 80px; height: 5px; background: var(--turquesa); margin: 15px auto; border-radius: 3px;}
 .texto-centro { font-size: 1.3rem; color: var(--texto-suave); margin-bottom: 3rem; text-align: center;}
 
-/* ========================================================
-   PANELES LATERALES FLOTANTES (AHORA VERTICALES - NO INVADEN)
-   ======================================================== */
+/* --- PANELES LATERALES FLOTANTES (VERTICALES) --- */
 .toggle-oculto { display: none; }
-
-/* Botones como pestañas verticales */
-.btn-lateral { 
-    position: fixed; 
-    background-color: var(--azul-medico); 
-    color: white; 
-    padding: 20px 12px; 
-    font-size: 1.1rem; 
-    font-weight: bold; 
-    cursor: pointer; 
-    z-index: 100; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25); 
-    transition: background 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+.btn-lateral { position: fixed; background-color: var(--azul-medico); color: white; padding: 20px 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.25); transition: background 0.3s; text-transform: uppercase; letter-spacing: 2px; }
 .btn-lateral:hover { background-color: var(--turquesa); }
+.btn-izq { left: 0; writing-mode: vertical-lr; border-radius: 0 8px 8px 0; }
+.btn-der { right: 0; writing-mode: vertical-rl; border-radius: 8px 0 0 8px; }
+.btn-izq-1 { top: 15%; } .btn-izq-2 { top: 55%; } .btn-der-1 { top: 15%; } .btn-der-2 { top: 55%; }
 
-/* Pestañas a la izquierda (El texto se lee de arriba a abajo) */
-.btn-izq { 
-    left: 0; 
-    writing-mode: vertical-lr; 
-    border-radius: 0 8px 8px 0; 
-}
-/* Pestañas a la derecha (El texto se lee de arriba a abajo) */
-.btn-der { 
-    right: 0; 
-    writing-mode: vertical-rl; 
-    border-radius: 8px 0 0 8px; 
-}
-
-/* Posiciones exactas (Arriba y Abajo en ambos lados) */
-.btn-izq-1 { top: 15%; }
-.btn-izq-2 { top: 55%; }
-.btn-der-1 { top: 15%; }
-.btn-der-2 { top: 55%; }
-
-/* Paneles Interiores */
 .panel { position: fixed; top: 0; bottom: 0; width: 420px; background: white; z-index: 200; padding: 3rem 2.5rem; box-shadow: 0 0 50px rgba(0,0,0,0.3); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto;}
 .panel-izquierdo { left: 0; transform: translateX(-100%); border-right: 6px solid var(--turquesa); }
 .panel-derecho { right: 0; transform: translateX(100%); border-left: 6px solid var(--turquesa); }
 
-/* Lógica de apertura según Checkbox */
 #toggle-l1:checked ~ #panel-l1 { transform: translateX(0); }
 #toggle-l2:checked ~ #panel-l2 { transform: translateX(0); }
 #toggle-r1:checked ~ #panel-r1 { transform: translateX(0); }
 #toggle-r2:checked ~ #panel-r2 { transform: translateX(0); }
 
-/* Ocultar el botón si su panel está abierto */
-#toggle-l1:checked ~ .btn-izq-1 { opacity: 0; pointer-events: none; }
-#toggle-l2:checked ~ .btn-izq-2 { opacity: 0; pointer-events: none; }
-#toggle-r1:checked ~ .btn-der-1 { opacity: 0; pointer-events: none; }
-#toggle-r2:checked ~ .btn-der-2 { opacity: 0; pointer-events: none; }
+#toggle-l1:checked ~ .btn-izq-1, #toggle-l2:checked ~ .btn-izq-2, #toggle-r1:checked ~ .btn-der-1, #toggle-r2:checked ~ .btn-der-2 { opacity: 0; pointer-events: none; }
 
-/* Estilo del contenido en los Paneles Laterales */
 .cerrar-panel { display: inline-block; margin-bottom: 2rem; cursor: pointer; color: var(--texto-suave); font-weight: bold; background: var(--bg-principal); padding: 8px 15px; border-radius: 5px;}
 .cerrar-panel:hover { color: var(--azul-medico); }
 .panel h3 { color: var(--azul-medico); margin-bottom: 1.5rem; border-bottom: 2px solid var(--turquesa); padding-bottom: 10px; font-size: 1.8rem;}
-.panel p { font-size: 1.2rem; color: var(--texto); line-height: 1.6; margin-bottom: 1.5rem;}
+.panel p { font-size: 1.15rem; color: var(--texto); line-height: 1.6; margin-bottom: 1.5rem;}
 .lista-exito li { font-size: 1.1rem; margin-bottom: 1.2rem; list-style: none; padding-left: 20px; position: relative; line-height: 1.5; color: var(--texto);}
 .lista-exito li::before { content: '➔'; color: var(--turquesa); position: absolute; left: 0; font-size: 1.2rem; top: 0px; font-weight: bold;}
 .alerta-panel { background: rgba(23, 195, 178, 0.1); padding: 20px; border-radius: 8px; margin-top: 25px; border-left: 5px solid var(--turquesa); color: var(--azul-oscuro); font-size: 1.1rem; line-height: 1.5;}
 
+/* IMÁGENES DENTRO DE LOS PANELES LATERALES */
+.img-panel { width: 100%; height: 180px; margin-bottom: 1.5rem; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 3px solid var(--bg-principal);}
+.img-panel img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ========================================================
-   ESTILOS DE DIAPOSITIVAS Y ACORDEONES 2x2 CENTRALES
-   ======================================================== */
-.badge { background: var(--turquesa); color: white; padding: 0.6rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; display: inline-block; font-weight: bold; letter-spacing: 1px; font-size: 1.1rem;}
-h1 { font-size: 4.5rem; color: var(--azul-oscuro); margin-bottom: 2rem; text-align: center; line-height: 1.1; }
-.intro-box { background: rgba(255, 255, 255, 0.95); padding: 2.5rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; max-width: 900px; position: relative; z-index: 2; border: 1px solid #e0e0e0;}
-.intro-box p { font-size: 1.8rem; color: var(--azul-medico); font-weight: bold; margin-bottom: 1rem; }
-.texto-secundario { font-size: 1.3rem !important; color: var(--texto-suave) !important; font-weight: normal !important; line-height: 1.6;}
+/* --- PORTADA CON IMAGEN (LAYOUT DIVIDIDO) --- */
 .circulos-fondo { position: absolute; top: -150px; right: -150px; width: 600px; height: 600px; border-radius: 50%; background: linear-gradient(135deg, rgba(23, 195, 178, 0.08) 0%, rgba(0, 78, 137, 0.05) 100%); z-index: 0; }
+.portada-layout { display: flex; align-items: center; gap: 4rem; max-width: 1300px; width: 100%; position: relative; z-index: 2; }
+.portada-texto { flex: 1.2; text-align: left; }
+.portada-imagen { flex: 0.8; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 4px solid var(--blanco); }
+.portada-imagen img { width: 100%; height: 100%; object-fit: cover; display: block; max-height: 480px; }
 
-.grid-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Columnas */
-    grid-template-rows: auto auto; /* 2 Filas */
-    gap: 1.5rem 2.5rem; 
-    width: 100%;
-    max-width: 1200px;
-}
+.badge { background: var(--turquesa); color: white; padding: 0.6rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; display: inline-block; font-weight: bold; letter-spacing: 1px; font-size: 1.1rem;}
+.portada-texto h1 { font-size: 4.2rem; color: var(--azul-oscuro); margin-bottom: 2rem; text-align: left; line-height: 1.1; }
+.intro-box { background: rgba(255, 255, 255, 0.95); padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; border: 1px solid #e0e0e0;}
+.intro-box p { font-size: 1.6rem; color: var(--azul-medico); font-weight: bold; margin-bottom: 1rem; }
+.texto-secundario { font-size: 1.2rem !important; color: var(--texto-suave) !important; font-weight: normal !important; line-height: 1.6;}
+
+/* --- ACORDEONES 2x2 CENTRALES --- */
+.grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 1.5rem 2.5rem; width: 100%; max-width: 1200px; }
 
 .acordeon-tech { background: var(--blanco); border: 1px solid #d1d5db; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); overflow: hidden; transition: all 0.3s ease; }
 .acordeon-tech:hover { border-color: #9ca3af; }
@@ -116,14 +76,22 @@ h1 { font-size: 4.5rem; color: var(--azul-oscuro); margin-bottom: 2rem; text-ali
 .acordeon-tech[open] summary::after { transform: rotate(45deg); color: var(--azul-medico); }
 
 .acordeon-contenido { padding: 0 2rem 1.5rem 2rem; border-top: 1px solid #f3f4f6; background: #fafcff; }
+
+/* IMÁGENES DENTRO DE LOS ACORDEONES */
+.img-acordeon { width: 100%; height: 160px; margin: 1.5rem 0 1rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 2px solid #e2e8f0;}
+.img-acordeon img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;}
+.img-acordeon:hover img { transform: scale(1.05); }
+
 .acordeon-contenido p { margin-top: 1.2rem; font-size: 1.1rem; color: var(--texto); line-height: 1.6; }
 .acordeon-contenido ul { margin-top: 1rem; padding-left: 2rem; }
 .acordeon-contenido li { font-size: 1.1rem; color: var(--texto-suave); margin-bottom: 0.8rem; line-height: 1.5; }
 .acordeon-contenido strong { color: var(--azul-oscuro); }
 
+/* --- PITCH FINAL --- */
 .pitch-final { background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medico) 100%); color: white; text-align: center; }
 .quote-box { background: rgba(255,255,255,0.05); padding: 4rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); max-width: 1100px; position: relative;}
 .comillas { font-size: 10rem; color: var(--turquesa); opacity: 0.2; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-family: serif; line-height: 1; }
 blockquote { font-size: 2.2rem; font-weight: 300; line-height: 1.6; position: relative; z-index: 2;}
-.scroll-down { margin-top: 3rem; font-size: 1.2rem; color: var(--azul-medico); animation: bounce 2s infinite; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;}
-@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+.scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 1.2rem; color: var(--azul-medico); animation: bounce 2s infinite; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;}
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} 60% {transform: translateX(-50%) translateY(-5px);} }
